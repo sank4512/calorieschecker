@@ -1,0 +1,1960 @@
+
+<!DOCTYPE html>
+
+<h lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Calories Tracker</title>
+
+   
+
+    <style>
+
+        body {
+
+    font-family: Arial, sans-serif;
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+    background-image: url('https://img.freepik.com/premium-photo/background-cooking-tagliatelle-pasta-ingredients-black-stone-background-italian-cuisine-top-view_187166-46923.jpg?w=1380'); /* Replace 'your-image-url.jpg' with the URL of your image */
+
+    background-size: cover; /* This ensures that the image covers the entire background */
+
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+
+    background-position: center; /* Centers the image horizontally and vertically */
+
+}
+
+ 
+
+        .container {
+
+            width: 80%;
+
+            margin: auto;
+
+            padding: 20px;
+
+        }
+
+ 
+
+        h1,
+
+        h2,
+
+        h3 {
+
+            color: #34bf77;
+
+            text-align: center;
+
+            font-size: 10;
+
+            background-color: #0e0c0c; /* Background color for headings */
+
+    padding: 10px;
+
+   border-radius: 15px;
+
+        }
+
+ 
+
+        label {
+
+            display: block;
+
+            color: white;
+
+            margin-bottom: 5px;
+
+        }
+
+        @keyframes lighting {
+
+    0% { box-shadow: 0 0 10px rgba(255, 0, 0, 0.4); }
+
+    50% { box-shadow: 0 0 15px rgba(255, 0, 0, 0.4); }
+
+    100% { box-shadow: 0 0 10px rgba(255, 0, 0, 0.4); }
+
+}
+
+        input,
+
+        select,
+
+        button {
+
+            width: 100%;
+
+            padding: 10px;
+
+            margin: 8px 0;
+
+            display: inline-block;
+
+            border: 2px solid transparent; ;
+
+            box-sizing: border-box;
+
+            border-radius: 55px;
+            background-color: rgba(255, 255, 255, 0.5);
+
+           
+            animation: lighting 2s infinite;
+
+            color: #f1f5f3;
+
+        }
+
+ 
+
+        button {
+
+            background-color: #34bf77;
+
+            color: #080707;
+
+            border: none;
+
+            cursor: pointer;
+
+        }
+
+ 
+
+        button:hover {
+
+            background-color: #34bf77;
+
+        }
+
+ 
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            margin-top: 20px;
+
+        }
+
+ 
+
+        table,
+
+        th,
+
+        td {
+
+            border: 1px solid #7db3d2;
+
+        padding: 8px;
+
+        text-align: left;
+
+        color: #e4dada;
+
+     
+
+        }
+
+ 
+
+        ::placeholder {
+
+    color: yellow; /* Darken the placeholder text color */
+
+    opacity: 0.7; /* Adjust the opacity of the placeholder text */
+
+}
+
+        th,
+
+        td {
+
+            padding: 15px;
+
+            text-align: left;
+
+        }
+
+ 
+
+        th {
+
+            background-color: #34bf77;
+
+            color: #eee6e6;
+
+        }
+
+ 
+
+        .result {
+
+            margin-top: 20px;
+
+        }
+
+ 
+
+        .reset {
+
+            background-color: #34bf77;
+
+            color: #060303;
+
+            cursor: pointer;
+
+        }
+
+ 
+
+        .reset:hover {
+
+            background-color: #34bf77;
+
+        }
+
+ 
+
+        /* Small button style */
+
+        .small-button {
+
+            font-size: 0.8em;
+
+            padding: 5px;
+
+            margin-top: 10px;
+
+        }
+
+      /* Top dashboard styles */
+
+        #topDashboard {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            background-color: #5f4b4b;
+
+            padding: 10px;
+
+            color:  #34bf77;
+
+            align-items: center;
+
+           text-align:center;
+
+        }
+
+ 
+
+        #topDashboard h1 {
+
+            margin: 0;
+
+        }
+
+ 
+
+        #topDashboard ul {
+
+            list-style: none;
+
+            margin: 0;
+
+            padding: 0;
+
+            display: flex;
+
+        }
+
+ 
+
+        #topDashboard li {
+
+            margin-right: 20px;
+
+        }
+
+ 
+
+        #topDashboard a {
+
+            text-decoration: none;
+
+            color: #fff;
+
+            font-weight: bold;
+
+            font-size: 1.2em;
+
+        }
+
+ 
+
+       
+
+ 
+
+        /* Chatbot styles */
+
+        #chatbotButton {
+
+            position: fixed;
+
+            bottom: 20px;
+
+            right: 20px;
+
+            width: 50px;
+
+            height: 50px;
+
+            background-image: url('https://support.upwork.com/hc/article_attachments/360040474034/chatbot-data.png');
+
+            /* Add your chatbot icon image path */
+
+            background-size: cover;
+
+            border: none;
+
+            border-radius: 50%;
+
+            cursor: pointer;
+
+            z-index: 9999;
+
+        }
+
+ 
+
+        #chatbotContainer {
+            size: cover;
+
+            align-self: center;
+
+            background-color:  rgba(173, 159, 159, 0.7);
+
+            background-blend-mode: green ;
+
+            border: 1px solid #f3efef;
+
+            border-radius: 5px;
+
+            padding: 10px;
+
+            display: none;
+
+            z-index: 9998;
+
+        }
+
+ 
+
+        .question {
+
+            background-color: #f8f5f5;
+
+            padding: 10px;
+
+            margin-bottom: 5px;
+
+            border-radius: 5px;
+
+            cursor: pointer;
+
+        }
+
+ 
+
+        .answer {
+
+            display: none;
+
+            padding: 10px;
+
+            background-color: #e4dada;
+
+            border: 1px solid #050404;
+
+            border-radius: 5px;
+
+            margin-bottom: 10px;
+
+        }
+
+ 
+
+        .chatbot-name {
+
+            text-align: center;
+
+        }
+
+       /* Sidebar styles */
+
+        #recommendationsPage {
+
+            display: none;
+
+            background-color: rgba(173, 159, 159, 0.7);
+
+            padding: 20px;
+
+            border-radius: 10px;
+
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        }
+
+ 
+
+        #dietList,
+
+        #workoutList {
+
+            list-style: none;
+
+            padding: 0;
+
+        }
+
+ 
+
+        #dietList li,
+
+        #workoutList li {
+
+            margin-bottom: 10px;
+
+        }
+
+ 
+
+        #dietList h3,
+
+        #workoutList h3 {
+
+            margin-top: 20px;
+
+        }
+
+        .calories-circle-container {
+
+    display: flex;
+
+    justify-content: center; /* Horizontally center the circle */
+
+    align-items: center; /* Vertically center the circle */
+
+    margin-top: 20px; /* Adjust margin as needed */
+
+}
+
+        /* New styles for dashboard layout */
+
+        .calories-circle {
+
+    width: 100px;
+
+    height: 100px;
+
+    border-radius: 50%;
+    border: 2px solid #00ff00; 
+
+    background-color: transparent;
+
+    color: #fff;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 1.5em;
+
+}
+
+      .app-icon {
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+#caloriesTable button {
+
+    visibility: visible;
+
+}
+
+.app-icon img {
+
+    width: 150px; /* Adjust the size of the icon as needed */
+
+    height: 150px; /* Adjust the size of the icon as needed */
+
+    margin-right: 10px; /* Add some space between the icon and the text */
+
+}
+
+ 
+
+.app-name {
+
+    color: rgb(19, 231, 51); /* Adjust the color of the app name */
+
+    font-size: 2.5em;
+
+    background-color: white; /* Adjust the font size of the app name */
+
+    padding: 55px 0;
+
+}
+.search-container {
+    display: flex; /* Use flexbox to align items */
+    align-items: center; /* Align items vertically */
+    width: 100%; /* Ensure container covers full width */
+}
+
+#foodSearch {
+    flex: 8; /* Allow the search input to grow and take 80% of available space */
+    width: calc(100% - 20px); /* Set the width of the search input */
+    margin-right: 10px; 
+}
+
+#searchButton, #closeButton {
+    flex: 1; /* Allow search and close buttons to take 10% of available space */
+    
+    max-width: 50px;  /* Set the width of search and close buttons */
+   /* Add some space between buttons */
+}
+#searchButton {
+    margin-right: 10px; /* Add margin to separate search button from close button */
+}
+
+
+    .addButton {
+
+        background-color: #4CAF50; /* Green background */
+
+        border: none;
+
+        color: white;
+
+        padding: 8px 16px; /* Adjust padding to change button size */
+
+        text-align: center;
+
+        text-decoration: none;
+
+        display: inline-block;
+
+        font-size: 14px; /* Adjust font size if needed */
+
+        margin-right: 10px; /* Add some margin to separate button from food name */
+
+    }
+
+   
+
+    /* Custom CSS to style list items */
+
+    .foodItem {
+
+        display: flex; /* Use flexbox */
+
+        align-items: center; /* Center items vertically */
+
+    }
+
+    .removeButton {
+
+        background-color: #f44336; /* Red background */
+
+        border: none;
+
+        color: white;
+
+        padding: 8px 16px; /* Adjust padding to change button size */
+
+        text-align: center;
+
+        text-decoration: none;
+
+        display: inline-block;
+
+        font-size: 14px; /* Adjust font size if needed */
+
+    }
+
+    .button {
+
+        display: inline-block;
+
+        padding: 10px 20px;
+
+        background-color: #4CAF50;
+
+        color: white;
+
+        text-align: center;
+
+        text-decoration: none;
+
+        font-size: 16px;
+
+        margin: 4px 2px;
+
+        transition-duration: 0.4s;
+
+        cursor: pointer;
+
+        border-radius: 8px;
+
+    }
+
+    .button:hover {
+
+        background-color: #45a049;
+
+    }
+
+ 
+
+    .AddButton{
+
+        width: 80px;
+
+    }
+
+    /* CSS Style for Food Database */
+
+#foodDatabaseList {
+
+    list-style-type: none;
+
+    padding: 0;
+
+}
+
+ 
+
+.food-item {
+
+    display: flex;
+
+    align-items: center; /* Align items vertically in center */
+
+    margin-bottom: 10px; /* Add some spacing between items */
+
+}
+
+ 
+
+.food-name {
+
+    flex: 1; /* Grow to fill available space */
+
+}
+
+ 
+
+.add-button {
+
+    margin-left: 10px;
+
+    width: 80px; /* Add margin for spacing */
+
+}
+
+ 
+
+    </style>
+
+</head>
+
+<body>
+
+  <div id="topDashboard" style="display:none;">
+
+   
+
+    <ul>
+
+        <li><a href="#" onclick="navigateTo('calculatePage')">Calculate Calories</a></li>
+
+        <li><a href="#" onclick="navigateTo('summaryPage')">Calories Summary</a></li>
+
+        <li><a href="#" onclick="showRecommendations()">Recommended</a></li>
+      
+
+    </ul>
+
+</div>
+
+
+    <div id="dashboard">
+
+       
+
+        <div id="content"></div>
+
+    <div class="container">
+
+        <!-- Login/Signup Page -->
+
+        <div id="loginSignupPage">
+
+          <div class="app-icon">
+
+       
+
+    </div>
+
+ 
+
+            <h2>Login</h2>
+
+            <label for="username">Username:</label>
+
+            <input type="text" id="username" required minlength="8" placeholder="Enter your username">
+
+            <label for="password">Password:</label>
+
+            <input type="password" id="password" required minlength="8" placeholder="Enter your password">
+
+            <button onclick="login()">Login</button>
+
+            <!-- Small signup button with explanatory comment -->
+
+            <button class="small-button" onclick="navigateTo('signupPage')">Don't have an account? Signup</button>
+
+        </div>
+
+ 
+
+        <!-- Signup Page -->
+
+        <div id="signupPage" style="display: none;">
+
+           <div class="app-icon">
+
+       </div>
+
+         
+
+         
+
+            <h2>Signup</h2>
+
+            <label for="signupUsername">Username:</label>
+
+            <input type="text" id="signupUsername" required minlength="8" placeholder="Enter your username">
+
+            <label for="signupPassword">Password:</label>
+
+            <input type="password" id="signupPassword" required minlength="8" placeholder="Enter your password">
+
+            <button onclick="signup()">Signup</button>
+
+            <!-- Small login button with explanatory comment -->
+
+            <button class="small-button" onclick="navigateTo('loginSignupPage')">Already have an account? Login</button>
+
+        </div>
+
+       
+
+        <button id="chatbotButton"  onclick="toggleChatbot()"></button>
+
+     
+
+        <!-- Chatbot Container -->
+
+        <div id="chatbotContainer" style="display: none;">
+
+            <h1 class="chatbot-name">Health Assistant</h1>
+
+            <h3>Hi, I am your health assistant, how can I help you?</h3>
+
+   
+
+            <div class="question" onclick="showAnswer('answer1')">How can I maintain a healthy weight?</div>
+
+            <div class="answer" id="answer1">Maintaining a healthy weight involves a balanced diet and regular exercise. Avoiding processed foods and sugary drinks can also help.</div>
+
+           
+
+            <div class="question" onclick="showAnswer('answer2')">Is there a way to increase height after a certain age?</div>
+
+            <div class="answer" id="answer2">Height is largely determined by genetics. While proper nutrition and exercise during adolescence can support growth, height increase after a certain age is unlikely.</div>
+
+   
+
+            <div class="question" onclick="showAnswer('answer3')">What are some good exercises for beginners?</div>
+
+            <div class="answer" id="answer3">For beginners, activities like walking, swimming, and cycling are good starting points. Start with low intensity and gradually increase duration and intensity.</div>
+
+            <!-- Add more questions and answers as needed -->
+
+            <div class="question" onclick="showAnswer('answer4')">What diet should I follow for better health?</div>
+
+            <div class="answer" id="answer4">A balanced diet includes fruits, vegetables, whole grains, lean proteins, and healthy fats. Limit processed foods, sugary snacks, and excessive salt intake.</div>
+
+            <div class="question" onclick="showAnswer('answer5')">How can I manage stress effectively?</div>
+
+            <div class="answer" id="answer5">Stress management techniques include deep breathing, meditation, yoga, regular exercise, and maintaining a healthy work-life balance.</div>
+
+            <div class="question" onclick="showAnswer('answer6')">How many hours of sleep do I need?</div>
+
+            <div class="answer" id="answer6">Most adults need 7-9 hours of sleep per night for optimal health and well-being.</div>
+
+            <div class="question" onclick="showAnswer('answer7')">Why is staying hydrated important</div>
+
+            <div class="answer" id="answer7">Staying hydrated is essential for regulating body temperature, maintaining bodily functions, and supporting overall health. Aim for 8 glasses of water per day. </div>
+
+           
+
+       
+
+        </div>
+
+       
+
+ 
+
+        <!-- Calculate Calories Page -->
+
+        <div id="calculatePage" style="display: none;">
+
+            <h2>Calculate Calories Page</h2>
+
+            <label for="height">Height (cm):</label>
+
+            <input type="number" id="height" required placeholder="Enter your height">
+
+            <label for="weight">Weight (kg):</label>
+
+            <input type="number" id="weight" required placeholder="Enter your weight">
+
+            <label for="age">Age:</label>
+
+            <input type="number" id="age" required placeholder="Enter your age">
+
+            <label for="gender">Gender:</label>
+
+            <select id="gender" required>
+
+                <option value="male">Male</option>
+
+                <option value="female">Female</option>
+
+            </select>
+
+            <button onclick="calculateCalories()">Calculate</button>
+
+        </div>
+
+ 
+
+        <!-- Calories Summary Page -->
+
+        <div id="summaryPage" style="display: none;">
+
+            <div class="container"></div>
+
+            <h2 style="text-align: center;">Calories Summary Page</h2>
+
+           
+
+           
+
+            <h3></h3>
+
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+
+                <div style="flex: 1;">  
+
+            <input type="text" id="foodSearch" placeholder="Search food..."  >
+
+             
+
+                 </div>
+                 <button id="searchButton" >Search</button>
+
+            <button id="closeButton" onclick="closeFoodDatabase()">Close</button>
+
+            </div>
+
+            <div id="foodDatabaseSection" style="display: none;">
+
+              <h2>Food Database</h2>
+
+    <table id="foodDatabaseTable"></table>
+
+   
+
+             
+
+           
+
+           
+
+        </div>
+
+        <div class="calories-circle-container">
+
+          <div class="calories-circle" id="requiredCaloriesCircle"></div>
+
+      </div>
+
+       
+
+       
+
+            <table id="caloriesTable">
+
+                <tr>
+
+                    <th>Food Item</th>
+
+                    <th>Quantity</th>
+
+                    <th>Total calories</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </table>
+
+           
+
+           
+
+           
+
+       
+
+             
+
+            <div class="result">
+
+                <p>Total Consumed Calories: <span id="totalConsumedCalories">0</span></p>
+
+                <p>Remaining Calories: <span id="remainingCalories">0</span></p>
+
+               
+
+                <div id="suggestionsContainer" style="background-color: #f9f9f9; border: 1px solid #ddd; padding: 10px; margin-top: 10px;">
+
+                  <p id="suggestions" style="margin: 0;"></p>
+
+              </div>
+
+            </div>
+
+         
+
+            <button onclick="navigateTo('loginSignupPage')">Logout</button>
+
+        </div>
+
+        <!-- Recommendations Page -->
+
+        <div id="recommendationsPage" style="display: none;">
+
+           <h2>Recommendations</h2>
+
+           <p>Your remaining calories: <span id="remainingCaloriesDisplay"></span></p>
+
+ 
+
+           <h3>Diet Plan</h3>
+
+           <ul id="dietList">
+
+             
+
+           </ul>
+
+ 
+
+           <h3>Workout Plan</h3>
+
+           <ul id="workoutList"></ul>
+
+         
+
+         </div>
+
+    </div>
+
+</div>
+
+  <!-- Bootstrap JS and dependencies -->
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+ 
+
+    <script>
+
+        let requiredCalories = 0;
+
+        let totalConsumedCalories = 0;
+
+       
+
+        const foodLog = [];
+
+        const foodDatabase = [
+
+           { name: 'Apple', calories: 52 },
+
+            { name: 'Banana', calories: 105 },
+
+            { name: 'Chicken Breast', calories: 165 },
+
+            { name: 'Samosas', calories: 125 },
+
+            { name: 'Butter chicken', calories: 400 },
+
+            { name: 'Aloo Gobi', calories: 150 },
+
+            { name: 'Chana Masala', calories: 250 },
+
+            { name: 'Biryani', calories: 500 },
+
+            { name: 'Tandoori Chicken', calories: 200 },
+
+            { name: 'Naan', calories: 200 },
+
+          { name: 'Roti', calories: 100 },
+
+    { name: 'Paratha', calories: 150 },
+
+    { name: 'Chapati', calories: 60 },
+
+    { name: 'Egg Boiled', calories: 80 },
+
+           { name: 'Egg Omelette', calories: 120 },
+
+    { name: 'Idli', calories: 100 },
+
+    { name: 'Bhakri', calories: 113 },
+
+    { name: 'Rice', calories: 120 },
+
+    { name: 'Fried Rice', calories: 150 },
+
+    { name: 'Black Tea', calories: 10 },
+
+    { name: 'Black Tea With Milk And Sugar', calories: 45 },
+
+    { name: 'Black Coffee', calories: 10 },
+
+    { name: 'Black Coffee With Milk And Sugar', calories: 45 },
+
+    { name: 'Milk', calories: 60 },
+
+    { name: 'Milk With Sugar', calories: 75 },
+
+    { name: 'Horlicks', calories: 120 },
+
+    { name: 'Puri', calories: 60 },
+
+    { name: 'Dal', calories: 150 },
+
+    { name: 'Papad', calories: 45 },
+
+    { name: 'Shahi Paneer ', calories: 263 },
+
+        { name: 'Burger', calories: 325 },
+
+    { name: 'Pizza', calories: 375 },
+
+    { name: 'Dahi Wada', calories: 364 },
+
+    { name: 'Bread', calories: 60 },
+
+    { name: 'Orange Juice', calories: 95 },
+
+    { name: 'Apple Juice', calories: 95 },
+
+    { name: 'Mango', calories: 70 },
+
+    { name: 'Orange', calories: 53 },
+
+    { name: 'Chikoo', calories: 94 },
+
+    { name: 'Papaya', calories: 32 },
+
+    { name: 'Peach', calories: 50 },
+
+    { name: 'Aloo Paratha', calories: 250 },
+
+    { name: 'Gulab Jamun', calories: 100 },
+
+    { name: 'Jalebi', calories: 125 },
+
+    { name: 'Shahi Tukda', calories: 300 },
+
+    { name: 'Malai Kofta', calories: 150 },
+
+    { name: 'Fish Curry', calories: 485 },
+
+    { name: 'Black Grapes', calories: 45 },
+
+    { name: 'Cherries', calories: 70 },
+
+    { name: 'Guava', calories: 66 },
+
+         
+
+            // Food database entries
+
+        ];
+
+        const dietPlans = [
+
+           
+
+         
+
+           { title: 'Grilled Chicken Salad', calories: 300 },
+
+    { title: 'Quinoa Bowl with Roasted Vegetables', calories: 250 },
+
+    { title: 'Greek Yogurt Parfait with Berries', calories: 150 },
+
+    { title: 'Oatmeal with Almonds and Banana', calories: 200 },
+
+    { title: 'Salmon with Steamed Broccoli', calories: 350 },
+
+    { title: 'Avocado Toast with Poached Egg', calories: 220 },
+
+    { title: 'Turkey and Veggie Wrap', calories: 280 },
+
+    { title: 'Mixed Berry Smoothie', calories: 180 },
+
+    { title: 'Sweet Potato and Black Bean Bowl', calories: 320 },
+
+    { title: 'Cottage Cheese with Pineapple', calories: 120 },
+
+    { title: 'Whole Wheat Pasta with Tomato Sauce', calories: 270 },
+
+    { title: 'Almond Butter and Banana Sandwich', calories: 230 },
+
+    { title: 'Spinach and Feta Stuffed Chicken Breast', calories: 320 },
+
+    { title: 'Brown Rice with Stir-Fried Tofu and Vegetables', calories: 300 },
+
+    { title: 'Chickpea Salad with Cucumber and Tomato', calories: 180 },
+
+    { title: 'Quinoa and Black Bean Salad', calories: 250 },
+
+    { title: 'Egg White Omelette with Spinach and Tomatoes', calories: 150 },
+
+    { title: 'Hummus with Carrot and Celery Sticks', calories: 100 },
+
+    { title: 'Green Smoothie with Kale and Mango', calories: 200 },
+
+    { title: 'Grilled Shrimp with Asparagus', calories: 280 },
+
+    // Add more diet items as needed
+
+            // Add more diet plans as needed
+
+        ];
+
+        const workoutVideos = [
+
+ 
+
+          { title: 'Sample Workout Video', videoUrl: 'https://www.youtube.com/embed/6k8npknseG4?si=KIP3Up_xFftA-zqr', caloriesBurnedPerMinute: 12 },
+
+    // Add more workout videos as needed
+
+   
+
+];
+
+ 
+
+        // Signup and Login functionality
+
+        const userDatabase = [];
+
+       
+
+ 
+
+    // Example usage:
+
+    // Call addRow function with appropriate values when adding a new food item
+
+ 
+
+ 
+
+        function signup() {
+
+            const username = document.getElementById('signupUsername').value;
+
+            const password = document.getElementById('signupPassword').value;
+          
+ 
+
+            if (username.length < 8 || password.length < 8) {
+
+                alert('Username and password must be at least 8 characters long.');
+
+            } else {
+
+                const existingUser = userDatabase.find(user => user.username === username);
+
+                if (existingUser) {
+
+                    alert('Username already exists. Please choose a different one.');
+
+                } else {
+
+                    userDatabase.push({ username, password });
+
+                    localStorage.setItem('userDatabase', JSON.stringify(userDatabase));
+
+ 
+
+                    alert('Signup successful! Please login.');
+
+                     // Redirect to login page after successful signup
+
+                    localStorage.setItem('isLoggedIn', true);
+
+                    navigateTo('loginSignupPage');
+
+ 
+
+                }
+
+            }
+
+        }
+
+ 
+
+        function login() {
+
+            const username = document.getElementById('username').value;
+
+            const password = document.getElementById('password').value;
+
+ 
+
+            const storedUsers = JSON.parse(localStorage.getItem('userDatabase')) || [];
+
+            const loggedInUser = storedUsers.find(user => user.username === username && user.password === password);
+
+ 
+
+            if (loggedInUser) {
+
+                alert('Welcome, ' + username + '!');
+
+               
+
+                localStorage.setItem('isLoggedIn', true);
+
+                navigateTo('calculatePage');
+
+                document.getElementById('topDashboard').style.display = 'flex';
+
+               
+
+             
+
+            } else {
+
+                alert('Invalid username or password. Please try again.');
+
+               
+
+            }
+
+        }
+
+     
+
+    function navigateToDashboard() {
+
+        // Hide all pages except the dashboard
+
+        document.getElementById('loginSignupPage').style.display = 'none';
+
+        document.getElementById('calculatePage').style.display = 'none';
+
+        document.getElementById('summaryPage').style.display = 'none';
+
+        document.getElementById('signupPage').style.display = 'none';
+
+     
+
+        document.getElementById('dashboard').style.display = 'flex';
+
+    }
+
+    
+    function checkAuthentication() {
+
+        // Check if the user is authenticated
+
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+
+ 
+
+        if (!isLoggedIn) {
+
+            // If not authenticated, redirect to the login/signup page
+
+            navigateTo('loginSignupPage');
+
+        }
+
+    }
+
+ 
+
+    // Call checkAuthentication when the page loads to enforce authentication
+
+    checkAuthentication();
+
+        function toggleChatbot() {
+
+            var chatbotContainer = document.getElementById("chatbotContainer");
+
+            chatbotContainer.style.display = (chatbotContainer.style.display === "none") ? "block" : "none";
+
+        }
+
+ 
+
+        function showAnswer(answerId) {
+
+            var answer = document.getElementById(answerId);
+
+            if (answer.style.display === "block") {
+
+                answer.style.display = "none";
+
+            } else {
+
+                answer.style.display = "block";
+
+            }
+
+        }
+
+     
+
+ 
+
+        function calculateRequiredCalories(height, weight, age, gender) {
+
+            let basalMetabolicRate;
+
+ 
+
+            if (gender === 'male') {
+
+                basalMetabolicRate = 10 * weight + 6.25 * height - 5 * age + 5;
+
+            } else {
+
+                basalMetabolicRate = 10 * weight + 6.25 * height - 5 * age - 161;
+
+            }
+
+ 
+
+            return Math.round(basalMetabolicRate * 1.2);
+
+        }
+
+ 
+
+        function calculateCalories() {
+
+            const height = parseFloat(document.getElementById('height').value);
+
+            const weight = parseFloat(document.getElementById('weight').value);
+
+            const age = parseInt(document.getElementById('age').value);
+
+            const gender = document.getElementById('gender').value;
+
+ 
+
+            requiredCalories = calculateRequiredCalories(height, weight, age, gender);
+
+            var requiredCaloriesCircle = document.getElementById("requiredCaloriesCircle");
+
+// Example value, replace with your actual value
+
+    requiredCaloriesCircle.innerText = requiredCalories;
+
+         
+
+           
+
+            navigateTo('summaryPage');
+
+            populateFoodOptions();
+
+        }
+
+ 
+
+        function populateFoodOptions() {
+
+            const selectFood = document.getElementById('consumedFood');
+
+            selectFood.innerHTML = '<option value="">Select a food item</option>';
+
+ 
+
+            foodDatabase.forEach(food => {
+
+                const option = document.createElement('option');
+
+                option.value = food.name;
+
+                option.textContent = food.name;
+
+                selectFood.appendChild(option);
+
+            });
+
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+
+    const searchButton = document.getElementById('searchButton');
+
+    searchButton.addEventListener('click', showFoodDatabase);
+
+});
+
+function showFoodDatabase() {
+
+    const foodDatabaseTable = document.getElementById('foodDatabaseTable');
+
+    const foodSearchInput = document.getElementById('foodSearch');
+
+    const searchTerm = foodSearchInput.value.toLowerCase();
+
+ 
+
+    // Clear previous results
+
+    foodDatabaseTable.innerHTML = '';
+
+ 
+
+    // Create table header row
+
+    const headerRow = document.createElement('tr');
+
+    const headers = ['Food Name', 'Quantity', 'Action'];
+
+    headers.forEach(headerText => {
+
+        const header = document.createElement('th');
+
+        header.textContent = headerText;
+
+        headerRow.appendChild(header);
+
+    });
+
+    foodDatabaseTable.appendChild(headerRow);
+
+ 
+
+    // Populate table with database items
+
+    foodDatabase.forEach(food => {
+
+        if (food.name.toLowerCase().includes(searchTerm)) {
+
+            const row = document.createElement('tr');
+
+ 
+
+            const nameCell = document.createElement('td');
+
+            nameCell.textContent = food.name;
+
+            row.appendChild(nameCell);
+
+ 
+
+            const caloriesCell = document.createElement('td');
+
+            caloriesCell.textContent = food.calories;
+
+            row.appendChild(caloriesCell);
+
+ 
+
+            const actionCell = document.createElement('td');
+
+            const addButton = document.createElement('button');
+
+            addButton.textContent = 'Add';
+
+            addButton.addEventListener('click', function() {
+
+                addFoodToLog(food);
+
+            });
+
+            actionCell.appendChild(addButton);
+
+            row.appendChild(actionCell);
+
+ 
+
+            foodDatabaseTable.appendChild(row);
+
+        }
+
+    });
+
+ 
+
+    document.getElementById('foodDatabaseSection').style.display = 'block';
+
+}
+
+ 
+
+function closeFoodDatabase() {
+
+    document.getElementById('foodDatabaseSection').style.display = 'none';
+
+    document.getElementById('foodSearch').value = ''; // Clear the search input
+
+}
+
+ 
+
+document.getElementById('closeButton').addEventListener('click', closeFoodDatabase);
+
+ 
+
+function addFoodToLog(food) {
+
+    const quantity = parseFloat(prompt(`Enter the quantity of ${food.name} (in grams):`));
+
+    if (!isNaN(quantity) && quantity > 0) {
+
+        const caloriesConsumed = (food.calories / 100) * quantity;
+
+        foodLog.push({ foodItem: food.name,quantity: quantity, foodCalories: caloriesConsumed });
+
+ 
+
+        // Update total consumed calories and remaining calories
+
+        totalConsumedCalories += caloriesConsumed;
+
+        displayTotalConsumedCalories();
+
+        calculateRemainingCalories();
+
+        checkCaloriesStatus();
+
+ 
+
+        // Display the updated food log
+
+        displayFoodLog();
+
+       
+
+        // Optionally, provide a confirmation message
+
+        alert(`Added ${food.name} (${quantity}g) to your log.`);
+
+    } else {
+
+        alert('Invalid quantity. Please enter a valid number.');
+
+    }
+
+}
+
+ 
+
+function addFoodToLog(food) {
+
+    const quantity = parseFloat(prompt(`Enter the quantity of ${food.name} (in grams):`));
+
+    if (!isNaN(quantity) && quantity > 0) {
+
+        const caloriesConsumed = (food.calories / 100) * quantity;
+
+        foodLog.push({ foodItem: food.name, quantity: quantity, foodCalories: caloriesConsumed });
+
+ 
+
+        // Update total consumed calories and remaining calories
+
+        totalConsumedCalories += caloriesConsumed;
+
+        displayTotalConsumedCalories();
+
+        calculateRemainingCalories();
+
+        checkCaloriesStatus();
+
+        updateRequiredCaloriesCircle(-caloriesConsumed); // Subtract consumed calories from required calories
+
+ 
+
+        // Create a new table row for the added food entry
+
+        const table = document.getElementById('caloriesTable').getElementsByTagName('tbody')[0];
+
+        const newRow = table.insertRow();
+
+        const foodCell = newRow.insertCell(0);
+
+        const quantityCell = newRow.insertCell(1);
+
+        const calorieCell = newRow.insertCell(2);
+
+        const actionCell = newRow.insertCell(3);
+
+ 
+
+        foodCell.textContent = food.name;
+
+        quantityCell.textContent = quantity;
+
+        calorieCell.textContent = caloriesConsumed.toFixed(2);
+
+        const removeButton = document.createElement('button');
+
+        removeButton.textContent = 'Remove';
+
+        removeButton.addEventListener('click', function() {
+
+            removeEntry(newRow.rowIndex, caloriesConsumed); // Adjusting for the header row
+
+        });
+
+        actionCell.appendChild(removeButton);
+
+    } else {
+
+        alert('Invalid quantity. Please enter a valid number.');
+
+    }
+
+}
+
+ 
+
+function removeEntry(rowIndex, removedCalories) {
+
+    // Remove the entry from the foodLog array
+
+    const removedEntry = foodLog.splice(rowIndex, 1)[0];
+
+ 
+
+    // Update the total consumed calories
+
+    totalConsumedCalories -= removedEntry.foodCalories;
+
+    displayTotalConsumedCalories();
+
+ 
+
+    // Update the remaining calories
+
+    calculateRemainingCalories();
+
+    checkCaloriesStatus();
+
+ 
+
+    // Remove the corresponding row from the table
+
+    const table = document.getElementById('caloriesTable').getElementsByTagName('tbody')[0];
+
+    table.deleteRow(rowIndex);
+
+ 
+
+    updateRequiredCaloriesCircle(removedCalories); // Add removed calories back to required calories
+
+}
+
+ 
+
+function updateRequiredCaloriesCircle(caloriesChange) {
+
+    requiredCalories += caloriesChange;
+
+    const requiredCaloriesCircle = document.getElementById('requiredCaloriesCircle');
+
+    requiredCaloriesCircle.textContent = requiredCalories.toFixed(2);
+
+}
+
+
+
+
+       
+
+     
+
+        function displayFoodLog() {
+
+            // Show the table when attempting to add food
+
+            document.getElementById('caloriesTable').style.display = 'table';
+
+ 
+
+            const table = document.getElementById('caloriesTable').getElementsByTagName('tbody')[0];
+
+ 
+
+            const newRow = table.insertRow();
+
+            const foodCell = newRow.insertCell(0);
+
+            const quantityCell = newRow.insertCell(1);
+
+            const calorieCell = newRow.insertCell(2);
+
+            const actionCell = newRow.insertCell(3); // Add a cell for the "Action" column
+
+ 
+
+            const consumedFood = document.getElementById('consumedFood').value;
+
+            foodCell.textContent = consumedFood;
+
+ 
+
+            const quantity = parseFloat(document.getElementById('quantity').value);
+
+            const foodEntry = foodDatabase.find(item => item.name.toLowerCase() === consumedFood.toLowerCase());
+
+            const caloriesConsumed = (foodEntry.calories / 100) * quantity;
+
+            calorieCell.textContent = caloriesConsumed.toFixed(2);
+
+ 
+
+            // Create the Remove button directly in HTML with inline styling for visibility
+
+            actionCell.innerHTML = `<button style="visibility: visible;" onclick="removeFoodItem(this.parentNode.parentNode)">Remove</button>`;
+
+        }
+
+
+
+
+        function displayTotalConsumedCalories() {
+
+            document.getElementById('totalConsumedCalories').textContent = totalConsumedCalories.toFixed(2);
+
+        }
+
+ 
+
+        function calculateRemainingCalories() {
+
+            const remainingCalories = requiredCalories - totalConsumedCalories;
+
+            document.getElementById('remainingCalories').textContent = remainingCalories.toFixed(2);
+
+        }
+
+        function showRecommendations() {
+
+            const remainingCalories = requiredCalories - totalConsumedCalories;
+
+ 
+
+            if (remainingCalories >= 0) {
+
+                document.getElementById('remainingCaloriesDisplay').textContent = remainingCalories.toFixed(2);
+
+ 
+
+                // Display diet plans
+
+                const dietList = document.getElementById('dietList');
+
+                dietList.innerHTML = '';
+
+                dietPlans.forEach(plan => {
+
+                    const listItem = document.createElement('li');
+
+                    listItem.innerHTML = `<strong>${plan.title}</strong>:(Calories: ${plan.calories})`;
+
+                    dietList.appendChild(listItem);
+
+                });
+
+ 
+
+               
+
+ 
+
+                // Show the recommendations page
+
+                navigateTo('recommendationsPage');
+
+            } else {
+
+                alert('Oops! You\'ve exceeded your daily calorie intake. Consider doing some exercise to burn excess calories.');
+
+              document.getElementById('remainingCaloriesDisplay').textContent = remainingCalories.toFixed(2);
+
+            // Show the recommendations page
+
+              // Display workout videos
+
+                const workoutList = document.getElementById('workoutList');
+
+                workoutList.innerHTML = '';
+
+                workoutVideos.forEach(video => {
+
+                    const listItem = document.createElement('li');
+
+                    listItem.innerHTML = `<strong>${video.title}</strong>: <iframe width="250" height="165" src="${video.videoUrl}" frameborder="0" allowfullscreen></iframe> (Calories burned per minute: ${video.caloriesBurnedPerMinute})`;
+
+                    workoutList.appendChild(listItem);
+
+                });
+
+                navigateTo('recommendationsPage');
+
+            }
+
+        }
+
+     
+
+     
+
+ 
+
+        function navigateTo(pageId) {
+
+          const isLoggedIn = localStorage.getItem('isLoggedIn');
+
+ 
+
+    if (!isLoggedIn && pageId !== 'loginSignupPage') {
+
+        // If not logged in and not navigating to the login/signup page, redirect to login/signup page
+
+        navigateTo('loginSignupPage');
+
+        return;
+
+    }
+
+            // Hide all pages
+
+            document.getElementById('loginSignupPage').style.display = 'none';
+
+            document.getElementById('calculatePage').style.display = 'none';
+
+            document.getElementById('summaryPage').style.display = 'none';
+
+            document.getElementById('recommendationsPage').style.display = 'none';
+
+            document.getElementById('signupPage').style.display = 'none';
+
+ 
+
+            // Show the selected page
+
+            document.getElementById(pageId).style.display = 'block';
+
+            if (isLoggedIn) {
+
+   
+
+       
+    }
+
+          }
+
+  function checkCaloriesStatus() {
+
+            const remainingCalories = requiredCalories - totalConsumedCalories;
+
+            const suggestionsElement = document.getElementById('suggestions');
+
+            if (remainingCalories < 0) {
+
+                suggestionsElement.textContent = 'You have exceeded your daily calorie intake. Consider doing some exercise to burn excess calories.';
+
+            } else {
+
+                suggestionsElement.textContent = 'You have consumed fewer calories than required. Consider eating more to meet your daily calorie goal.';
+
+            }
+
+        }
+       
+
+
+       
+
+    </script>
+
+</body>
+
+</html>
+
